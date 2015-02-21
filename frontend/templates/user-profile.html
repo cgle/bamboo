@@ -1,6 +1,8 @@
 <div id="userBlock">
     <div id="streamLive">
-      <video id="player" autoplay="true"></video>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA
+AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+9TXL0Y4OHwAAAABJRU5ErkJggg==" id="player"/>
     </div>
     <script>
       var socket = io();
@@ -10,14 +12,12 @@
       });
 
       var updateVid = function(base64String) {
-        $('#player').remove();
-        $('#streamLive').append('<video id="player" autoplay="true"></video>');
-        var video = $('#player');
-        video.append("<source type='video/mp4' src='data:video/mp4;base64," + base64String + "'>");
+        // $('#player').remove();
+        $("#player").attr("src","data:image/png;base64,"+base64String);
       };
 
-      socket.on('video', function(data) {
-        console.log('adifjodaifj');
+      socket.on('play', function(data) {
+        console.log("adfad");
         var uint8Arr = new Uint8Array(data.buffer);
         var binary = '';
         for (var i = 0; i < uint8Arr.length; i++) {

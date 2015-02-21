@@ -2,8 +2,7 @@ define(['jquery','underscore','backbone','views/searchListView', 'views/userProf
 	function($,_,Backbone, searchListView,userProfileView, login){
 		var AppRouter = Backbone.Router.extend({
 			routes: {
-				"/": "home",
-				// "*actions": "defaultAction"
+				"": "loginView",
 				"search" : "searchList",
 				"user/:id" : "userProfile",
 				"login" : "loginView"
@@ -34,4 +33,4 @@ define(['jquery','underscore','backbone','views/searchListView', 'views/userProf
 		}
 
 		return {initialize:initialize};
-	});	
+	});

@@ -60,14 +60,14 @@ var runServer = function() {
     socket.on('chat', function(msg){
       io.emit('chat', msg);
     });
-    socket.on('video', function(stream) {
-      console.log(stream);
-      io.emit('play', stream);
+
+    socket.on('recording', function(stream) {
+      io.emit('play', {buffer:stream);
     });
 
-    fs.readFile('./app/404-background.mp4', function(err, buffer){
-      io.emit('video', { buffer: buffer });
-    });
+    // fs.readFile('./app/404-background.mp4', function(err, buffer){
+    //   io.emit('video', { buffer: buffer });
+    // });
     socket.on('disconnect', function(){
       console.log('user disconnected');
     });

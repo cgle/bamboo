@@ -1,12 +1,4 @@
-<link class="cssdeck" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" class="cssdeck">
-
 <div class="" id="loginModal">
-  <br>
-  <div class="modal-header">
-    <h3>Welcome to Bamboo</h3>
-  </div>
-  <br>
   <div class="modal-body">
     <div class="well">
       <ul class="nav nav-tabs">
@@ -15,47 +7,22 @@
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane active in" id="login">
-          <form class="form-horizontal" action='' method="POST">
-            <fieldset>
-              <div id="legend">
-                <legend class="">Login</legend>
-              </div>    
-              <div class="control-group">
-                <!-- Username -->
-                <label class="control-label"  for="username">Username</label>
-                <div class="controls">
-                  <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                </div>
-              </div>
-              
-              <div class="control-group">
-                <!-- Button -->
-                <div class="controls">
-                  <button class="btn btn-success">Login</button>
-                </div>
-              </div>
-            </fieldset>
-          </form>                
+          <label class="control-label"  for="username">Username</label>
+          <div class="controls">
+            <input type="text" id="login-username" name="username" placeholder="" class="input-xlarge">
+          </div>
+          <button class="btn btn-success" style="margin-top:5px" id="login-button">Login</button>
         </div>
-        
-        <div class="tab-pane fade" id="create">
 
-          <form id="tab">
-            <div id="legend">
-              <legend class="">New Account</legend>
-            </div>
+        <div class="tab-pane fade" id="create">
             <div class="control-group">
                 <!-- Username -->
                 <label class="control-label"  for="username">Username</label>
                 <div class="controls">
-                  <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                  <input type="text" id="register-username" name="username" placeholder="" class="input-xlarge">
                 </div>
             </div>
-            <div>
-              <button class="btn btn-primary">Create Account</button>
-            </div>
-
-          </form>
+              <button class="btn btn-primary" style="margin-top:5px" id="register-button">Create Account</button>
         </div>
       </div>
     </div>

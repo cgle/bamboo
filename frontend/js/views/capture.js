@@ -15,10 +15,12 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
     userCount:0,
     selfVideo:null,
     selfStream:null,
+    stream:null,
     // Arrays
     videoStreams:[],
     events: {
-      'click button#capture' : 'capture'
+      'click button#capture' : 'capture',
+      'click button#stop' : 'stop',
     },
     initialize: function(){
       this.socket = io();
@@ -42,6 +44,7 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
     navigator.webkitGetUserMedia({'video':true},function(stream){
       this.canStream = true;
       that.selfStream = stream;
+      this.stream = stream;
       if (navigator.webkitGetUserMedia) {
         var video =  document.getElementById('basic-stream');
         var blobUrl = window.URL.createObjectURL(stream);
@@ -116,6 +119,9 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
     var that = this;
     that.videoStreams.push(data);
     // console.log(that.videoStreams);
+  },
+  stop: function(){
+    this.selfStream.stop();
   }
 });
   return captureView;

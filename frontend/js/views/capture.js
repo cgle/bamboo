@@ -51,12 +51,12 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
             //webkitRequestAnimationFrame(draw);
             setInterval(function(){
               draw();
-            },100);
+            },1);
 
             function draw(){
               var canvas = document.getElementById('selfCanvas');
           var ctx = canvas.getContext('2d');
-          ctx.drawImage(video, 0, 0, 155, 115);
+          ctx.drawImage(video, 0, 0);
           var stringData= canvas.toDataURL();
           that.selfVideo = stringData;
           that.socketBroadcastStream(stringData);

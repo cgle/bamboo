@@ -20,7 +20,7 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/user-profil
 				console.log(data);
 				var image = new Image();
 				image.src = data.data;
-				ctx.drawImage(image, 0, 0, 155, 115);
+				ctx.drawImage(image, 0, 0);
 			});
 		},
 		displayUsersStreams:function(data){

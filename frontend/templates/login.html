@@ -1,63 +1,62 @@
-<!DOCTYPE html>
-<!-- Credit :  Hugo Giraudel
-http://codepen.io/HugoGiraudel/details/iuacL -->
+<link class="cssdeck" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" class="cssdeck">
 
-<html lang='en'>
-<head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/login.css" />
-</head>
-<body>
-
-<form id="login">
-  <h1>Log in</h1>
-  <div class="inset">
-  <p>
-    <label for="email">EMAIL ADDRESS</label>
-    <input type="text" name="email" id="email">
-  </p>
-  <p>
-    <label for="password">PASSWORD</label>
-    <input type="password" name="password" id="password">
-  </p>
-  <p>
-    <input type="checkbox" name="remember" id="remember">
-    <label for="remember">Remember me</label>
-  </p>
+<div class="" id="loginModal">
+  <br>
+  <div class="modal-header">
+    <h3>Welcome to Bamboo</h3>
   </div>
-  <p class="p-container">
-    <span>Forgot password ?</span>
-    <span><a id="registerLink" onClick="toRegister()">Register</a></span>
-    <input type="submit" name="go" id="go" value="Log in">
-  </p>
-</form>
+  <br>
+  <div class="modal-body">
+    <div class="well">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+        <li><a href="#create" data-toggle="tab">Create Account</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active in" id="login">
+          <form class="form-horizontal" action='' method="POST">
+            <fieldset>
+              <div id="legend">
+                <legend class="">Login</legend>
+              </div>    
+              <div class="control-group">
+                <!-- Username -->
+                <label class="control-label"  for="username">Username</label>
+                <div class="controls">
+                  <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                </div>
+              </div>
+              
+              <div class="control-group">
+                <!-- Button -->
+                <div class="controls">
+                  <button class="btn btn-success">Login</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>                
+        </div>
+        
+        <div class="tab-pane fade" id="create">
 
-<form id="register">
-  <h1>Register</h1>
-  <div class="inset">
-  <p>
-    <label for="email">EMAIL ADDRESS</label>
-    <input type="text" name="email" id="email">
-  </p>
-  <p>
-    <label for="password">PASSWORD</label>
-    <input type="password" name="password" id="password">
-  </p>
-  <p>
-    <label for="password">CONFIRM PASSWORD</label>
-    <input type="password" name="password" id="password">
-  </p>
+          <form id="tab">
+            <div id="legend">
+              <legend class="">New Account</legend>
+            </div>
+            <div class="control-group">
+                <!-- Username -->
+                <label class="control-label"  for="username">Username</label>
+                <div class="controls">
+                  <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                </div>
+            </div>
+            <div>
+              <button class="btn btn-primary">Create Account</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  <p class="p-container">
-    <input type="submit" name="go" id="go" value="Register">
-  </p>
-</form>
-
-
-<!-- SCRIPT -->
-  <script type="text/javascript" src="js/login.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-</body>
-</html>

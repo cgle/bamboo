@@ -7,7 +7,6 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/search-list
 		},
 		render: function(){
 		}
-
 		});
 		
 	return searchListView;

@@ -5,8 +5,9 @@ define(['jquery','underscore','backbone','views/searchListView', 'views/userProf
 				"/": "home",
 				// "*actions": "defaultAction"
 				"search" : "searchList",
-				"user" : "userProfile",
+				"user/:id" : "userProfile",
 				"login" : "loginView"
+				""
 			}
 
 		});
@@ -21,7 +22,7 @@ define(['jquery','underscore','backbone','views/searchListView', 'views/userProf
 				var dashboard = new searchListView();
 				dashboard.render();
 			});
-			app_router.on('route:userProfile', function(){
+			app_router.on('route:userProfile', function(id){
 				var dashboard = new userProfileView();
 				dashboard.render();
 			});

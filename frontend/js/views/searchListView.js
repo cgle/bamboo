@@ -9,6 +9,6 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/search-list
 		}
 
 		});
-		return searchListView;
-
-	});
+		
+	return searchListView;
+});

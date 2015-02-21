@@ -6,7 +6,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
-var session = require('express-session');
+var session = require('client-sessions');
 var busboy = require('connect-multiparty');
 //load project modules & configs);
 var config = require('./app/config');
@@ -42,19 +42,14 @@ var runServer = function() {
     app.use(errorHandler());
   }
 
-
-  app.use(session({secret: config.app_secret,
-                  resave : false,
-                  saveUninitialized: false}));
-
-  var User = require('./app/models/user');
-
-
+  app.use(session({
+    cookieName: 'session',
+    secret: config.app_secret,
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000,
+  }));
 
   app.get('/', express.static(path.join(__dirname, '/frontend')));
-  app.get('/api', function(req,res) {
-    res.send({'message': 'api is running', 'status': res.status});
-  });
   require('./app/routes')(app);
   //app listen port 8080
   app.listen(8080);

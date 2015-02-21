@@ -1,6 +1,6 @@
 {
-  "name": "vivid",
-  "description": "vivid",
+  "name": "bamboo",
+  "description": "bamboo",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -20,6 +20,7 @@
     "express-session": "*",
     "express-jwt": "*",
     "express-unless": "*",
-    "connect-multiparty": "*"
+    "connect-multiparty": "*",
+    "client-sessions": "*"
   }
 }

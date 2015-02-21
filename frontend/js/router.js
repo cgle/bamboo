@@ -7,7 +7,6 @@ define(['jquery','underscore','backbone','views/searchListView', 'views/userProf
 				"search" : "searchList",
 				"user/:id" : "userProfile",
 				"login" : "loginView"
-				""
 			}
 
 		});

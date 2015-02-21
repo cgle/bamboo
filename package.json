@@ -1,0 +1,25 @@
+{
+  "name": "vivid",
+  "description": "vivid",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "*",
+    "underscore": "*",
+    "async": "*",
+    "request": "*",
+    "event-stream": "*",
+    "JSONStream": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "morgan": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "method-override": "*",
+    "errorhandler": "*",
+    "express-session": "*",
+    "express-jwt": "*",
+    "express-unless": "*",
+    "connect-multiparty": "*"
+  }
+}

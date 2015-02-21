@@ -1,0 +1,63 @@
+var express = require('express');
+var app = express();
+var path = require('path');
+var mongoose = require('mongoose');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var errorHandler = require('errorhandler');
+var methodOverride = require('method-override');
+var session = require('express-session');
+var busboy = require('connect-multiparty');
+//load project modules & configs);
+var config = require('./app/config');
+var allowCrossDomain = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTIONS,PATCH");
+  next();
+};
+mongoose.connect(config.url);
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error'));
+
+db.on('open', function () {
+  runServer();
+});
+
+var runServer = function() {
+  app.use(morgan('dev'));
+  app.use(express.static(__dirname + '/frontend'));
+  app.set('port', process.env.PORT || 8080);
+  app.use(allowCrossDomain);
+  app.use(bodyParser.json());
+  app.use(bodyParser({ keepExtensions: true, uploadDir: __dirname + "/public/uploads" }));
+  app.use(bodyParser.urlencoded({
+   extended: true
+  }));
+  app.use(methodOverride());
+  if ('development' == app.get('env')) {
+    app.use(errorHandler());
+  }
+
+
+  app.use(session({secret: config.app_secret,
+                  resave : false,
+                  saveUninitialized: false}));
+
+  var User = require('./app/models/user');
+
+
+
+  app.get('/', express.static(path.join(__dirname, '/frontend')));
+  app.get('/api', function(req,res) {
+    res.send({'message': 'api is running', 'status': res.status});
+  });
+  require('./app/routes')(app);
+  //app listen port 8080
+  app.listen(8080);
+};
+
+

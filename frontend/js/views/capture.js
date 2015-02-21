@@ -21,7 +21,7 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
       'click button#capture' : 'capture'
     },
     initialize: function(){
-      var socket = io();
+      this.socket = io();
       this.$el.html(_.template(captureTemplate));
     },
     render: function(){
@@ -31,20 +31,20 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
       var errorCallback = function(e) {
         console.log('Reeeejected!', e);
       };
-      if (navigator.getUserMedia) {
-        self.navigator.getUserMedia();
+      if (self.getUserMedia) {
+        self.getUserMedia();
       } else {
         video.src = 'somevideo.webm'; // fallback.
       }
     },
     getUserMedia:function(){
-    var _ = this;
+    var that = this;
     navigator.webkitGetUserMedia({'video':true},function(stream){
       this.canStream = true;
-      _.selfStream = stream;
+      that.selfStream = stream;
       if (navigator.webkitGetUserMedia) {
-        var video =  document.getElementById('self');
-        var blobUrl = window.webkitURL.createObjectURL(stream);
+        var video =  document.getElementById('basic-stream');
+        var blobUrl = window.URL.createObjectURL(stream);
             video.src = blobUrl;
             video.controls = false;
 
@@ -58,13 +58,13 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
           var ctx = canvas.getContext('2d');
           ctx.drawImage(video, 0, 0, 155, 115);
           var stringData= canvas.toDataURL();
-          _.selfVideo = stringData;
-          _.socketBroadcastStream(stringData);
+          that.selfVideo = stringData;
+          that.socketBroadcastStream(stringData);
           //webkitRequestAnimationFrame(draw);
             }
 
-            // _.selfVideo = blobUrl;
-            // _.socketBroadcastStream(blobUrl);
+            // that.selfVideo = blobUrl;
+            // that.socketBroadcastStream(blobUrl);
         } else {
           var video = $('#self');
           video.src = stream; // Opera
@@ -74,13 +74,49 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/capture.htm
             console.log("Unable to get video stream!");
             this.canStream = false;
         });
-        
+
+    },
+      displayUsersStreams:function(){
+    var that = this;
+    $.each(that.videoStreams,function(index, videoStream){
+      //console.log('stream:', videoStream.stream);
+      var friendVideo = $('#friend');
+      friendVideo.attr('src',videoStream.stream);
+      //console.log(friendVideo);
+      setInterval(function(){
+      //  console.log(friendVideo);
+      },100);
+    });
   },
-    
-    socketBroadcastStream: function(imageData){
-      var self = this;
-      self.socket.emit('stream',{data:imageData, room:_.roomID});
-    }
-    return captureView;
-})
-};
+
+  drawToCanvas:function(){
+    console.log('variable_or_string');
+
+    var that = this;
+    var video = document.getElementById('self');
+    var canvas = document.getElementById('selfCanvas');
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, 155, 115);
+    webkitRequestAnimationFrame(that.drawToCanvas);
+
+  },
+
+  requestingStreams:function(userID){
+    var that = this;
+    console.log(userID+' requested stream');
+    that.socket.emit('sendingVideoStream', { video:that.selfVideo, requestedUser:userID, room:that.roomID });
+  },
+
+  // Socket Methods
+  socketBroadcastStream:function(imageData){
+    var that = this;
+    that.socket.emit('stream',{data:imageData});
+  },
+  socketStoreStreams:function(data){
+    var that = this;
+    that.videoStreams.push(data);
+    // console.log(that.videoStreams);
+  }
+});
+  return captureView;
+});

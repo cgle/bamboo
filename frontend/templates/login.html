@@ -2,9 +2,11 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" class="cssdeck">
 
 <div class="" id="loginModal">
+  <br>
   <div class="modal-header">
     <h3>Welcome to Bamboo</h3>
   </div>
+  <br>
   <div class="modal-body">
     <div class="well">
       <ul class="nav nav-tabs">
@@ -42,8 +44,13 @@
             <div id="legend">
               <legend class="">New Account</legend>
             </div>
-            <label>Username</label>
-            <input type="text" value="" class="input-xlarge">
+            <div class="control-group">
+                <!-- Username -->
+                <label class="control-label"  for="username">Username</label>
+                <div class="controls">
+                  <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+                </div>
+            </div>
             <div>
               <button class="btn btn-primary">Create Account</button>
             </div>

@@ -21,6 +21,7 @@
     "express-jwt": "*",
     "express-unless": "*",
     "connect-multiparty": "*",
-    "client-sessions": "*"
+    "client-sessions": "*",
+    "socket.io": "*"
   }
 }

@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var http = require('http').Server(app);
 var path = require('path');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
@@ -8,6 +9,7 @@ var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var session = require('client-sessions');
 var busboy = require('connect-multiparty');
+var io = require('socket.io')(http);
 //load project modules & configs);
 var config = require('./app/config');
 var allowCrossDomain = function(req, res, next) {
@@ -51,8 +53,18 @@ var runServer = function() {
 
   app.get('/', express.static(path.join(__dirname, '/frontend')));
   require('./app/routes')(app);
+
+  io.on('connection', function(socket){
+    console.log('a user connected');
+    socket.on('disconnect', function(){
+      console.log('user disconnected');
+    });
+  });
+
+
+
   //app listen port 8080
-  app.listen(8080);
+  http.listen(8080);
 };
 
 

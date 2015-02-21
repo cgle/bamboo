@@ -62,7 +62,7 @@ var runServer = function() {
     });
 
     socket.on('recording', function(stream) {
-      io.emit('play', {buffer:stream);
+      io.emit('play', {buffer:stream});
     });
 
     // fs.readFile('./app/404-background.mp4', function(err, buffer){

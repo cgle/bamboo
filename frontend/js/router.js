@@ -1,11 +1,12 @@
-define(['jquery','underscore','backbone','views/searchListView', 'views/userProfileView', 'views/login'],
-	function($,_,Backbone, searchListView,userProfileView, login){
+define(['jquery','underscore','backbone','views/searchListView', 'views/userProfileView', 'views/login', 'views/capture'],
+	function($,_,Backbone, searchListView,userProfileView, login, capture){
 		var AppRouter = Backbone.Router.extend({
 			routes: {
 				"": "loginView",
 				"search" : "searchList",
 				"user/:id" : "userProfile",
-				"login" : "loginView"
+				"login" : "loginView",
+				"capture": "captureView"
 			}
 
 		});
@@ -27,7 +28,11 @@ define(['jquery','underscore','backbone','views/searchListView', 'views/userProf
 			app_router.on('route:loginView', function(){
 				var dashboard = new login();
 				dashboard.render();
-			})
+			});
+			app_router.on('route:captureView', function(){
+				var dashboard = new capture();
+				dashboard.render();
+			});
 
 			Backbone.history.start();
 		}

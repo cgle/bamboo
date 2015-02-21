@@ -8,6 +8,7 @@ var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var session = require('client-sessions');
 var busboy = require('connect-multiparty');
+
 //load project modules & configs);
 var config = require('./app/config');
 var allowCrossDomain = function(req, res, next) {
@@ -53,6 +54,14 @@ var runServer = function() {
   require('./app/routes')(app);
   //app listen port 8080
   app.listen(8080);
+
+  mongoose.model('user', {username: String});
+
+  app.get('/user', function(req, res){
+    mongoose.model('user').find(function(err, user){
+      res.send(user);
+    });
+  });
 };
 
 

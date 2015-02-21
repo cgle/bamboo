@@ -5,14 +5,8 @@ define(['jquery','underscore','backbone','bootstrap','text!templates/search-list
 		initialize: function(){
 			this.$el.html(_.template(searchListTemplate));
 		},
-		search: function(e){
-			this.$('#user-list').html('');
-			var searchString = this.$("#search-query").val();
-
-		}
 		render: function(){
 		}
-
 		});
 		
 	return searchListView;

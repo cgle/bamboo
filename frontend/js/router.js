@@ -1,10 +1,12 @@
-define(['jquery','underscore','backbone','views/searchListView'],
-	function($,_,Backbone, searchListView){
+define(['jquery','underscore','backbone','views/searchListView', 'views/userProfileView', 'views/login'],
+	function($,_,Backbone, searchListView,userProfileView, login){
 		var AppRouter = Backbone.Router.extend({
 			routes: {
 				"/": "home",
 				// "*actions": "defaultAction"
-				"search" : "searchList"
+				"search" : "searchList",
+				"user" : "userProfile",
+				"login" : "loginView"
 			}
 
 		});
@@ -17,6 +19,14 @@ define(['jquery','underscore','backbone','views/searchListView'],
 			// });
 			app_router.on('route:searchList', function(){
 				var dashboard = new searchListView();
+				dashboard.render();
+			});
+			app_router.on('route:userProfile', function(){
+				var dashboard = new userProfileView();
+				dashboard.render();
+			});
+			app_router.on('route:loginView', function(){
+				var dashboard = new login();
 				dashboard.render();
 			})
 

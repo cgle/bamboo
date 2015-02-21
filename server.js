@@ -10,6 +10,7 @@ var methodOverride = require('method-override');
 var session = require('client-sessions');
 var busboy = require('connect-multiparty');
 var io = require('socket.io')(http);
+var fs = require('fs');
 //load project modules & configs);
 var config = require('./app/config');
 var allowCrossDomain = function(req, res, next) {
@@ -35,7 +36,6 @@ var runServer = function() {
   app.set('port', process.env.PORT || 8080);
   app.use(allowCrossDomain);
   app.use(bodyParser.json());
-  app.use(bodyParser({ keepExtensions: true, uploadDir: __dirname + "/public/uploads" }));
   app.use(bodyParser.urlencoded({
    extended: true
   }));
@@ -56,6 +56,17 @@ var runServer = function() {
 
   io.on('connection', function(socket){
     console.log('a user connected');
+    socket.on('chat', function(msg){
+      io.emit('chat', msg);
+    });
+    socket.on('video', function(stream) {
+      console.log(stream);
+      io.emit('play', stream);
+    });
+
+    fs.readFile('./app/404-background.mp4', function(err, buffer){
+      io.emit('video', { buffer: buffer });
+    });
     socket.on('disconnect', function(){
       console.log('user disconnected');
     });

@@ -1,9 +1,32 @@
-
-
 <div id="userBlock">
-
     <div id="streamLive">
-      
+      <video id="player" autoplay="true"></video>
     </div>
-    
+    <script>
+      var socket = io();
+      socket.on('chat', function(msg){
+        console.log(msg);
+        $('#streamLive').append($('<li>').text(msg));
+      });
+
+      var updateVid = function(base64String) {
+        $('#player').remove();
+        $('#streamLive').append('<video id="player" autoplay="true"></video>');
+        var video = $('#player');
+        video.append("<source type='video/mp4' src='data:video/mp4;base64," + base64String + "'>");
+      };
+
+      socket.on('video', function(data) {
+        console.log('adifjodaifj');
+        var uint8Arr = new Uint8Array(data.buffer);
+        var binary = '';
+        for (var i = 0; i < uint8Arr.length; i++) {
+            binary += String.fromCharCode(uint8Arr[i]);
+        }
+        var base64String = window.btoa(binary);
+        updateVid(base64String);
+      });
+
+
+    </script>
 </div>

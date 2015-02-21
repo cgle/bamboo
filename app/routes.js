@@ -25,6 +25,12 @@ module.exports = function(app) {
     }
   });
 
+  app.get('/api/currentuser', function(req, res) {
+    if (req.session && req.session.user) {
+      res.send({data: req.session.user});
+    } else res.send({data: null});
+  });
+
   app.post('/api/login', function(req, res) {
     if (!(req.session && req.session.user)) {
       User.findOne({username: req.body.username}, function(err, user) {
